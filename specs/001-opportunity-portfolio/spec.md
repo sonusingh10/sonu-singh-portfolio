@@ -42,12 +42,12 @@ A prospective employer, client, or collaborator can contact Sonu through a confi
 
 **Why this priority**: A direct, low-friction next step is essential to the portfolio goal.
 
-**Independent Test**: Verify required form fields and accessible errors/success states, direct LinkedIn and GitHub links, and mailto once its address is supplied.
+**Independent Test**: Verify native required-field validation, Formspree's provider confirmation/error response when configured, direct LinkedIn and GitHub links, and the supplied mailto address.
 
 **Acceptance Scenarios**:
 
-1. **Given** a valid Formspree form ID is configured, **When** a visitor submits a valid message, **Then** the form posts to Formspree and reports its response accessibly.
-2. **Given** no form ID or email address has been supplied, **When** a visitor reaches Contact, **Then** LinkedIn and GitHub remain usable and the unconfigured form/email are not presented as working channels.
+1. **Given** a valid Formspree form ID is configured, **When** a visitor submits a valid message, **Then** the native form posts to Formspree and its configured confirmation/error response is shown.
+2. **Given** no form ID is supplied, **When** a visitor reaches Contact, **Then** email, LinkedIn, and GitHub remain usable and the unconfigured form is not presented as working.
 
 ### User Story 4 - Review and download résumé (Priority: P2)
 
@@ -78,9 +78,9 @@ Search engines receive accurate identity and page metadata, and the owner can de
 ### Edge Cases
 
 - Missing domain: canonical and sitemap origin use an explicit environment/configuration placeholder and are documented as a launch TODO.
-- Missing Formspree ID or email: do not show a falsely operational form or mailto link; leave direct social contact available.
+- Missing Formspree ID: do not show a falsely operational form; leave email and direct social contact available.
 - Missing portrait: use an intentional initials/typography treatment with no invented likeness; keep photo replacement documented.
-- Missing education and unsupported additional projects/stack: omit them from claims and mark them as owner TODOs.
+- Unsupported additional projects/stack: omit them from claims and mark them as owner TODOs.
 - Conflicting supplied employment periods: retain stated dates and surface a TODO for Sonu to resolve; do not silently alter them.
 - Reduced motion: all core content and actions remain available with animations disabled.
 - External 7LayerX image unavailable: provide useful alternative text and keep the project link.
@@ -96,8 +96,9 @@ Search engines receive accurate identity and page metadata, and the owner can de
 - **FR-004**: Experience MUST include Cisco Systems, StarLink, Barracuda Networks, and Helloclass, with the source role and date strings and 2–4 factual outcome/responsibility bullets each.
 - **FR-005**: 7LayerX MUST be the featured project with a screenshot, live link, problem/approach/outcome copy supported by the source or live site, and a TODO for unavailable stack/results.
 - **FR-006**: Skills MUST be grouped by observability, networking, security, and cloud/systems; credentials MUST be represented exactly as supplied.
+- **FR-006a**: Education MUST use the degree, field, institution, and dates supplied in the résumé.
 - **FR-007**: All editable profile facts MUST be held in one typed data module consumed by the site and résumé generator.
-- **FR-008**: Contact MUST include an accessible form integration configurable through a non-secret Formspree form ID, direct LinkedIn and GitHub links, and mailto only when an email is supplied. No secret may be committed.
+- **FR-008**: Contact MUST include an accessible form integration configurable through a non-secret Formspree form ID, the supplied professional email, and direct LinkedIn and GitHub links. No secret may be committed.
 - **FR-009**: The site MUST support dark and light themes and respect `prefers-reduced-motion`.
 - **FR-010**: Search support MUST include title/description metadata, canonical URL, Open Graph and Twitter metadata/images, sitemap, robots instructions, and Person JSON-LD.
 - **FR-011**: Privacy-friendly analytics MAY be configured, but MUST be disabled by default and optional at build/deploy time.
@@ -119,7 +120,7 @@ Search engines receive accurate identity and page metadata, and the owner can de
 
 - **SC-001**: At least 4 of 5 unbriefed reviewers can identify Sonu's focus and a contact path after a 30-second scan.
 - **SC-002**: On a production-quality run, Lighthouse Performance, Accessibility, Best Practices, and SEO each score at least 95; any unmet score is reported with its measurement conditions.
-- **SC-003**: All source-listed roles, dates, grouped skills, credentials, and the 7LayerX project link appear in the site or résumé, with no unsupported factual claims.
+- **SC-003**: All source-listed roles, dates, grouped skills, credentials, education, professional email, and the 7LayerX project link appear in the site or résumé, with no unsupported factual claims.
 - **SC-004**: At mobile and desktop breakpoints, page content remains readable, navigable by keyboard, and free of horizontal overflow.
 - **SC-005**: Every internal route/resource link resolves in a production build, and every external target is checked at delivery time.
 - **SC-006**: `npm run build` completes successfully and produces a static deployment directory.
@@ -129,7 +130,8 @@ Search engines receive accurate identity and page metadata, and the owner can de
 - The provided HTML is the authoritative source for personal facts; the live 7LayerX website may substantiate project content only.
 - The requested audience is recruiters, prospective clients, and collaborators.
 - The portfolio will use a restrained palette chosen during design.
-- A final domain, photo, email address, education details, additional portfolio projects, Formspree form ID, and actual 7LayerX stack may be supplied later.
+- A final domain, photo, additional portfolio projects, Formspree form ID, and actual 7LayerX stack may be supplied later.
+- Phone is present in the résumé but is not published on the portfolio unless Sonu later asks to add it.
 - The overlap between Helloclass (Jan 2016–Oct 2018) and Barracuda Networks (Jul 2018–Jan 2020) is preserved and flagged for confirmation.
 - No response-time promise or quantified 7LayerX result will be claimed without evidence.
 
@@ -142,3 +144,4 @@ Search engines receive accurate identity and page metadata, and the owner can de
 - Q: What domain should I use for canonical SEO URLs and deployment guidance? → A: A domain is owned and will be shared later.
 - Q: Do you have preferred accent colors or a visual style? → A: Choose a restrained palette.
 - Q: Is there anything you want omitted from the source material or public site? → A: Use professional details only.
+- Q: Which extra professional facts does the supplied résumé confirm? → A: Include its education, professional email, and additional relevant skills/role details; keep personal phone unpublished.

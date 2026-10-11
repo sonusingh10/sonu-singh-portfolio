@@ -14,8 +14,8 @@
 
 ### Contact delivery
 
-- **Decision**: Use a browser-side Formspree POST configured with a public form ID, plus direct social links. Hide the form until its ID exists. Add `mailto:` only when an email is supplied.
-- **Rationale**: This works with a static export and does not put a private API key in browser code. Form delivery cannot be activated until Sonu creates/configures the form endpoint.
+- **Decision**: Use a native HTML Formspree POST configured with a public form ID, plus direct social links. Hide the form until its ID exists. Add `mailto:` only when an email is supplied.
+- **Rationale**: Native required-field validation and provider confirmation work with a static export without client-side form code or a private API key. Form delivery cannot be activated until Sonu creates/configures the form endpoint.
 - **Alternatives considered**: Resend requires a server-side function and secret, which breaks the single static artifact unless a provider-specific backend is added.
 - **References**: [Formspree HTML Forms](https://help.formspree.io/hc/en-us/articles/360055613373-HTML-Forms), [Next.js Static Exports](https://nextjs.org/docs/app/guides/static-exports).
 
@@ -27,7 +27,7 @@
 
 ### Design and motion
 
-- **Decision**: Use a typography-led, warm-paper/ink palette with a rust-orange signal color and a restrained network trace motif. Use three small React Bits components for a subtle text reveal, project hover spotlight, and pointer magnetic treatment; preserve static content, avoid layout shift, and disable/short-circuit motion for reduced-motion users.
+- **Decision**: Use a typography-led, warm-paper/ink palette with a rust-orange signal color and a restrained network trace motif. Use three React Bits components for a subtle text reveal, project hover spotlight, and pointer magnetic treatment; preserve static content, avoid layout shift, and disable/short-circuit motion for reduced-motion users.
 - **Rationale**: The palette and motif connect the network/observability story to a calm professional presentation. Three moments keep the page distinctive without delaying its first impression.
 - **Alternatives considered**: Continuous 3D/particle backgrounds and full-screen entrance animation add weight and distract from the contact goal.
 - **References**: [React Bits](https://github.com/DavidHDev/react-bits), [Taste Skill](https://github.com/Leonxlnx/taste-skill), [Impeccable](https://github.com/pbakaus/impeccable).
@@ -40,4 +40,4 @@
 
 ## Clarification Outcome
 
-The initial answer batch confirms all-opportunity positioning, preferred name/photo handling, domain availability later, restrained visual direction, and professional-only content. Remaining questions are not blockers: missing personal details remain clearly marked TODOs; conflicting experience dates are retained verbatim pending owner confirmation. No further clarification question is required before planning.
+The initial answer batch confirms all-opportunity positioning, preferred name/photo handling, domain availability later, restrained visual direction, and professional-only content. The subsequently supplied résumé confirms education, professional email, and additional role/skill details. Its phone number is omitted from the public portfolio. Remaining questions are not blockers: the photo and Formspree ID remain TODOs; conflicting experience dates are retained verbatim pending owner confirmation. No further clarification question is required before planning.

@@ -1,0 +1,34 @@
+{
+  "name": "sonu-singh-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run resume:build && npm run social:build && next build",
+    "resume:build": "tsx scripts/generate-resume.ts",
+    "preview": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "social:build": "tsx scripts/generate-social-image.ts"
+  },
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "motion": "^12.23.24",
+    "next": "16.4.0",
+    "pdfkit": "^0.17.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.19.0",
+    "@types/pdfkit": "^0.17.3",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "playwright": "^1.64.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
