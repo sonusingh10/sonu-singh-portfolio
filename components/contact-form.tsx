@@ -8,7 +8,7 @@ export function ContactForm() {
     <label>Email<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
     <label>What would you like to talk about?<textarea name="message" rows={4} required maxLength={5000} /></label>
     <input name="_gotcha" className="honeypot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-    <button className="button button-dark" type="submit">Send a message<span aria-hidden="true">↗</span></button>
+    <button className="button button-dark" type="submit" data-interaction>Send a message<span aria-hidden="true">↗</span></button>
     <p className="form-status">Formspree will confirm delivery in your browser.</p>
   </form>;
 }

@@ -22,7 +22,7 @@ Verification run: 11 October 2026 against the generated static site using the lo
 
 ## Owner TODOs before launch
 
-- [ ] Replace `NEXT_PUBLIC_SITE_URL=https://your-domain.example` with the owned canonical domain, connect DNS, and rebuild/redeploy.
+- [ ] Set `NEXT_PUBLIC_SITE_URL=https://sonusinghx.com`, connect DNS in Cloudflare Pages, and rebuild/redeploy.
 - [ ] Create a Formspree form, set `NEXT_PUBLIC_FORMSPREE_FORM_ID`, and submit a real end-to-end test. Until then, the site shows direct email/social contact instead of pretending the form is active.
 - [ ] Confirm Helloclass (Jan 2016–Oct 2018) and Barracuda (Jul 2018–Jan 2020) dates; the supplied records overlap and are kept unchanged.
 - [ ] Supply a professional photo and approved alt text if desired.

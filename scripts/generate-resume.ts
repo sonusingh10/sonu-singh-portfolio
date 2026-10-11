@@ -29,9 +29,13 @@ async function main() {
     doc.font("Helvetica").fontSize(8.5).fillColor(muted).text(item.dates, { align: "right", continued: false });
     doc.font("Helvetica-Bold").fontSize(9).fillColor(accent).text(`${item.company}  ·  ${item.location}`);
     doc.moveDown(.18);
-    for (const bullet of item.bullets) {
-      doc.font("Helvetica").fontSize(8).fillColor(ink).text(`•  ${bullet}`, { width: width - 8, indent: 0, lineGap: 0, paragraphGap: 1 });
-    }
+    doc.font("Helvetica").fontSize(8.2).fillColor(ink).list(item.bullets, {
+      width,
+      bulletIndent: 9,
+      textIndent: 17,
+      lineGap: 0,
+      paragraphGap: 1,
+    });
     doc.moveDown(.32);
   }
 
@@ -39,17 +43,29 @@ async function main() {
   const project = profile.projects[0];
   doc.font("Helvetica-Bold").fontSize(9.5).fillColor(ink).text(`${project.name} — ${project.label}`, { continued: true });
   doc.font("Helvetica").fontSize(8).fillColor(accent).text(`   ${project.url}`);
-  doc.moveDown(.15).font("Helvetica").fontSize(8).fillColor(muted).text(`${project.role}. ${project.outcome}`, { width, lineGap: 1 });
+  doc.moveDown(.15).font("Helvetica").fontSize(8.4).fillColor(ink).text(`${project.role}. ${project.outcome}`, { width, lineGap: 1 });
   doc.moveDown(.25);
 
   heading("Skills");
   for (const group of profile.skills) {
     doc.font("Helvetica-Bold").fontSize(8.4).fillColor(ink).text(`${group.title}: `, { continued: true });
-    doc.font("Helvetica").fontSize(8).fillColor(muted).text(group.items.join(" · "), { width, lineGap: 1 });
+    doc.font("Helvetica").fontSize(8.2).fillColor(ink).text(group.items.join(" · "), { width, lineGap: 1 });
     doc.moveDown(.12);
   }
   heading("Certifications");
-  doc.font("Helvetica").fontSize(8.2).fillColor(ink).text(profile.certifications.join("   ·   "), { width, lineGap: 2 });
+  doc.font("Helvetica").fontSize(7.6).fillColor(ink);
+  profile.certifications.forEach((credential, index) => {
+    if (index > 0) doc.text("   ·   ", { width, continued: true });
+    doc.text(credential.name, {
+      width,
+      continued: index < profile.certifications.length - 1,
+      link: credential.url,
+    });
+  });
+  heading("Recognition");
+  for (const item of profile.recognition) {
+    doc.font("Helvetica").fontSize(7.8).fillColor(ink).text(item.name, { width, lineGap: 0, link: item.url });
+  }
   heading("Education");
   doc.font("Helvetica-Bold").fontSize(8.6).fillColor(ink).text(`${profile.education.degree} — ${profile.education.field}`);
   doc.font("Helvetica").fontSize(8.2).fillColor(muted).text(`${profile.education.institution}  ·  ${profile.education.dates}`);

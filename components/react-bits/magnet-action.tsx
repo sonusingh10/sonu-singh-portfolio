@@ -14,5 +14,5 @@ export function MagnetAction({ href, children }: { href: string; children: React
     coarse.addEventListener("change", update);
     return () => { reduce.removeEventListener("change", update); coarse.removeEventListener("change", update); };
   }, []);
-  return <Magnet className="magnet-wrap" padding={35} magnetStrength={12} disabled={disabled}><a className="hero-cta" href={href}>{children}</a></Magnet>;
+  return <Magnet className="magnet-wrap" padding={35} magnetStrength={12} disabled={disabled}><a className="hero-cta" href={href} data-interaction>{children}</a></Magnet>;
 }

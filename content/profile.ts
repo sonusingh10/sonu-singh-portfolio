@@ -14,6 +14,22 @@ export type SkillGroup = {
   items: string[];
 };
 
+export type ToolCategory = {
+  title: string;
+  tools: string[];
+};
+
+export type ToolGroup = {
+  title: string;
+  categories: ToolCategory[];
+};
+
+export type Credential = {
+  name: string;
+  url?: string;
+  issuerUrl?: string;
+};
+
 export type Project = {
   name: string;
   label: string;
@@ -34,7 +50,8 @@ export const profile = {
   headline:
     "I help enterprise teams understand what’s happening across complex networks, security, and digital experience.",
   location: "Kraków, Poland",
-  availability: "Open to roles, freelance work & collaborations",
+  contactNote:
+    "Let’s connect, collaborate, and turn complex technology into real-world impact across networking, security, observability, and customer success.",
   email: "sonusinghabd@gmail.com",
   phone: null,
   summary:
@@ -56,12 +73,12 @@ export const profile = {
       role: "Technical Account Manager · ThousandEyes",
       dates: "Aug 2022 — Present",
       summary:
-        "Helping enterprise customers improve adoption, technical outcomes, and observability maturity.",
+        "Primary technical advisor to enterprise customers using ThousandEyes for digital experience monitoring, network visibility, and observability.",
       bullets: [
-        "Drive ThousandEyes adoption, customer technical success, and observability maturity across enterprise accounts.",
-        "Design and optimize observability architectures integrating ThousandEyes with Splunk, SolarWinds, and Grafana.",
-        "Lead onboarding, enablement, workshops, health checks, architecture reviews, and Enterprise Agent deployments across cloud, hybrid, and on-premises environments.",
-        "Investigate network, application, and infrastructure performance with ThousandEyes, logs, TCPDump, Wireshark, and partner teams across Product, Engineering, SRE, and DevOps.",
+        "Align technical account strategies with customer priorities, infrastructure needs, operational objectives, and ThousandEyes adoption goals.",
+        "Design and optimize end-to-end observability with ThousandEyes, Splunk, Grafana, OpenTelemetry, webhooks, SD-WAN, and Dynatrace; advise on instrumentation, telemetry pipelines, and monitoring practices.",
+        "Lead proactive health checks, architecture reviews, optimization assessments, workshops, and enablement to surface risks and help teams realize platform value.",
+        "Coordinate complex escalations and root-cause investigations with customers and Support, Product, Engineering, SRE, DevOps, Platform Engineering, and Development teams; share recurring needs to inform product improvements.",
       ],
     },
     {
@@ -72,9 +89,9 @@ export const profile = {
       summary: "Supporting enterprise firewall and network security deployments.",
       bullets: [
         "Resolved approximately 70% of Palo Alto Firewall and Panorama support incidents within 24 hours.",
-        "Provided L2/L3 support for firewall policies, NAT, GlobalProtect, IPSec and SSL VPN, URL Filtering, Content-ID, security profiles, and threat prevention.",
-        "Implemented and maintained firewall policies and vulnerability-mitigation recommendations.",
-        "Investigated customer issues through log review, packet capture, configuration analysis, and escalation management.",
+        "Delivered L2/L3 enterprise network and security support for Palo Alto Networks NGFW and Panorama, including policies, NAT, GlobalProtect, VPN, URL Filtering, and threat prevention.",
+        "Implemented approved changes and troubleshot complex incidents through recovery and root-cause analysis using logs, packet captures, and configuration analysis.",
+        "Communicated with customers, identified risk, and recommended firewall and cybersecurity improvements while coordinating escalations.",
       ],
     },
     {
@@ -84,10 +101,10 @@ export const profile = {
       dates: "Jul 2018 — Jan 2020",
       summary: "Enterprise firewall deployment and technical consulting.",
       bullets: [
-        "Deployed Barracuda NextGen and CloudGen Firewall solutions for enterprise customers.",
-        "Designed and deployed cloud firewall solutions across AWS, Azure, and GCP.",
-        "Provided technical consulting from deployment through operations, including configuration, troubleshooting, and best-practice guidance.",
-        "Used packet capture and log analysis to diagnose routing, security policy, VPN, and performance issues.",
+        "Supported Barracuda NextGen and CloudGen Firewall customers in a 24×7×365 technical support environment.",
+        "Troubleshot firewall configuration, routing, connectivity, and performance issues using packet captures and log analysis.",
+        "Supported firewall deployments and configurations across AWS, Microsoft Azure, and GCP, from implementation through operations.",
+        "Managed customer cases, communicated progress against service-level commitments, led root-cause analysis, and recommended configuration and security improvements.",
       ],
     },
     {
@@ -126,10 +143,12 @@ export const profile = {
       items: [
         "TCP/IP",
         "DNS & DHCP",
+        "Email Security Gateway",
         "HTTP/S",
         "Routing & switching",
         "IPSec VPN",
         "IKEv1/IKEv2",
+        "SD-WAN",
         "Wireshark",
         "TCPDump",
         "Packet capture",
@@ -154,30 +173,77 @@ export const profile = {
     },
     {
       number: "04",
-      title: "Cloud & systems",
+      title: "Cloud & Automation",
       refrain: "Understand the environment.",
       items: [
         "AWS",
         "Azure",
         "GCP",
         "Linux / Red Hat",
-        "Windows",
+        "Ansible",
         "Docker",
+        "Kubernetes",
         "Python",
         "Blue Prism process automation",
         "SaaS security",
-        "pfSense",
+      ],
+    },
+    {
+      number: "05",
+      title: "AI & monitoring",
+      refrain: "Turn signals into useful workflows.",
+      items: [
+        "Built a ThousandEyes Alert Analysis skill",
+        "Built an API-driven MCP server for monitoring",
       ],
     },
   ] satisfies SkillGroup[],
+  toolGroups: [
+    {
+      title: "Network troubleshooting",
+      categories: [
+        { title: "Packet capture & analysis", tools: ["Wireshark", "tcpdump", "tshark"] },
+        { title: "Connectivity & path", tools: ["ping", "traceroute / tracert", "MTR", "pathping", "hping3"] },
+        { title: "Ports & scanning", tools: ["Nmap", "netcat (nc)", "telnet", "ss / netstat"] },
+        { title: "Throughput", tools: ["iPerf3", "Speedtest CLI"] },
+        { title: "Monitoring", tools: ["SolarWinds", "PRTG", "Nagios", "Cacti"] },
+        { title: "Flow & logs", tools: ["NetFlow / sFlow", "Syslog", "SNMP"] },
+        { title: "Simulation & lab", tools: ["GNS3", "Cisco Packet Tracer", "EVE-NG"] },
+        { title: "Cloud networking", tools: ["AWS VPC Flow Logs", "AWS Reachability Analyzer", "Azure Network Watcher", "GCP Connectivity Tests"] },
+      ],
+    },
+    {
+      title: "Application troubleshooting",
+      categories: [
+        { title: "HTTP & API", tools: ["cURL", "Postman", "Browser DevTools (Network tab)", "Fiddler", "Charles Proxy"] },
+        { title: "Logs & observability", tools: ["Splunk", "Kibana", "Grafana", "Dynatrace"] },
+        { title: "Metrics & tracing", tools: ["Prometheus", "OpenTelemetry"] },
+        { title: "Error tracking", tools: ["Sentry"] },
+        { title: "Containers & orchestration", tools: ["Docker", "Kubernetes"] },
+        { title: "Ticketing", tools: ["ServiceNow", "Jira"] },
+      ],
+    },
+  ] satisfies ToolGroup[],
   certifications: [
-    "Cisco Certified DevNet Associate",
-    "Palo Alto Networks PCNSE ×2",
-    "Barracuda NextGen Firewall Certification",
-    "Juniper JNCIA — Security",
-    "Red Hat Certified System Administrator (RHCSA)",
-    "Forescout FSCA",
-  ],
+    { name: "Cisco AI Technical Practitioner (AITECH)" },
+    { name: "Data Science @ Cisco: Generative AI Blue Belt (2025)", issuerUrl: "https://www.linkedin.com/company/cisco/" },
+    { name: "Cisco Certified DevNet Associate", url: "https://www.linkedin.com/in/sonusingh111106/overlay/1717784097315/single-media-viewer/?profileId=ACoAABYFUl0B0n_USsv5UzSY60-sb7NimUndSSA" },
+    { name: "Cisco Certified Specialist — Enterprise Network Assurance", url: "https://www.linkedin.com/in/sonusingh111106/overlay/1717784078331/single-media-viewer/?profileId=ACoAABYFUl0B0n_USsv5UzSY60-sb7NimUndSSA" },
+    { name: "Palo Alto Networks PCSE", url: "https://www.linkedin.com/in/sonusingh111106/overlay/1635473529501/single-media-viewer/?profileId=ACoAABYFUl0B0n_USsv5UzSY60-sb7NimUndSSA" },
+    { name: "Palo Alto Networks Prisma Access — SASE", url: "https://www.linkedin.com/in/sonusingh111106/overlay/1635485788344/single-media-viewer/?profileId=ACoAABYFUl0B0n_USsv5UzSY60-sb7NimUndSSA" },
+    { name: "Barracuda NextGen Firewall Certification" },
+    { name: "Barracuda CloudGen Firewall", url: "https://www.linkedin.com/in/sonusingh111106/overlay/1635474122725/single-media-viewer/?profileId=ACoAABYFUl0B0n_USsv5UzSY60-sb7NimUndSSA" },
+    { name: "Juniper JNCIA — Security" },
+    { name: "Red Hat Certified System Administrator (RHCSA)" },
+    { name: "Forescout FSCA" },
+    { name: "NVIDIA AI Infrastructure and Operations Fundamentals", url: "https://www.coursera.org/account/accomplishments/verify/K8W9VRG10CEH?utm_source=ln&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course" },
+  ] satisfies Credential[],
+  recognition: [
+    {
+      name: "Excellent Performance and Contribution — StarLink FY21",
+      url: "https://www.linkedin.com/in/sonusingh111106/overlay/1635490873082/single-media-viewer/?profileId=ACoAABYFUl0B0n_USsv5UzSY60-sb7NimUndSSA",
+    },
+  ] satisfies Credential[],
   education: {
     degree: "Bachelor of Technology",
     field: "Electronics and Communication Engineering",
@@ -197,7 +263,7 @@ export const profile = {
       approach:
         "Build a practical knowledge platform with engineering notes, hands-on labs, interactive learning, and small tools across networking, security, observability, cloud, DevOps, Linux, and AI.",
       outcome:
-        "The live platform brings those resources together. Its networking library includes BGP articles, a learning module, an eBGP lab, and practical network tools.",
+        "The live platform brings those resources together. Practical notes, hands-on labs, and small tools for the networks and infrastructure underneath modern work. Explore networking, security, observability, cloud, DevOps, Linux, and AI—one layer at a time.",
       role: "Creator and builder",
       stack: null,
     },
@@ -205,8 +271,8 @@ export const profile = {
   seo: {
     title: "Sonu Singh — Network Security & Observability",
     description:
-      "Technical Account Manager helping enterprise teams make sense of complex networks, security, and digital experience. Open to roles, freelance work, and collaborations.",
-    siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.example",
+      "Technical Account Manager helping enterprise teams understand complex networks, security, and digital experience. Connect to discuss opportunities, collaborations, and real-world impact.",
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://sonusinghx.com",
   },
 } as const;
 
