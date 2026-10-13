@@ -63,6 +63,7 @@ export const profile = {
   ],
   principles: ["Trace the signal.", "Find the layer.", "Share what matters."],
   socialLinks: {
+    website: "https://www.7layerx.com/",
     linkedin: "https://www.linkedin.com/in/sonusingh111106/",
     github: "https://github.com/sonusingh10",
   },

@@ -14,6 +14,8 @@ npm run dev
 
 Open `http://localhost:3000`. Leave `NEXT_PUBLIC_FORMSPREE_FORM_ID` empty while previewing; direct email and social links remain available. For the native message form, create a Formspree form and put its form ID in `.env.local` (the value after `/f/` in its endpoint). The browser checks required fields and Formspree handles its confirmation response. Set `NEXT_PUBLIC_SITE_URL` to the final canonical domain before building. `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is optional and analytics is not loaded until configured.
 
+Optional Cloudflare Pages analytics counts aggregate page loads and résumé download clicks. Configure the D1 database and owner access key using the steps in [`DEPLOYMENT.md`](DEPLOYMENT.md); the public count badge stays off unless explicitly enabled.
+
 ## Update profile content
 
 Edit the typed data in [`content/profile.ts`](content/profile.ts). It powers the visible page, contact links, Person structured data, metadata, sitemap and résumé PDF. Keep dates and claims tied to verified source records. Phone is intentionally omitted. Add a photo only after supplying an approved image and alt text. The current source dates for Helloclass and Barracuda overlap; verify those dates before changing them.

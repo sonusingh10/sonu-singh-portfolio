@@ -2,18 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const preferenceKey = "sonu-click-sounds-v2";
+const preferenceKey = "sonu-click-sounds";
 
 function readSoundPreference() {
   try {
-    return window.localStorage.getItem(preferenceKey) !== "off";
+    return window.localStorage.getItem(preferenceKey) === "on";
   } catch {
-    return true;
+    return false;
   }
 }
 
 export function InteractionFeedback() {
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
   const audioContext = useRef<AudioContext | null>(null);
 
   useEffect(() => {
@@ -32,27 +32,25 @@ export function InteractionFeedback() {
 
       if (!readSoundPreference()) return;
       try {
-        const Context = window.AudioContext ?? (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+        const Context = window.AudioContext;
         if (!Context) return;
         const context = audioContext.current ?? new Context();
         audioContext.current = context;
-        const playTone = () => {
-          const now = context.currentTime;
-          const oscillator = context.createOscillator();
-          const gain = context.createGain();
-          oscillator.type = "sine";
-          oscillator.frequency.setValueAtTime(740, now);
-          oscillator.frequency.exponentialRampToValueAtTime(980, now + 0.055);
-          gain.gain.setValueAtTime(0.0001, now);
-          gain.gain.exponentialRampToValueAtTime(0.085, now + 0.012);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.095);
-          oscillator.connect(gain);
-          gain.connect(context.destination);
-          oscillator.start(now);
-          oscillator.stop(now + 0.1);
-        };
-        if (context.state === "suspended") void context.resume().then(playTone);
-        else playTone();
+        if (context.state === "suspended") void context.resume();
+
+        const now = context.currentTime;
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(740, now);
+        oscillator.frequency.exponentialRampToValueAtTime(980, now + 0.055);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.035, now + 0.012);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.095);
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        oscillator.start(now);
+        oscillator.stop(now + 0.1);
       } catch {
         // Sound is an optional enhancement; unsupported or blocked audio stays silent.
       }
@@ -77,7 +75,6 @@ export function InteractionFeedback() {
       <path d="M4 10v4h3l5 4V6l-5 4H4Z" />
       {enabled ? <><path d="M16 9a4 4 0 0 1 0 6" /><path d="M18.5 6.5a8 8 0 0 1 0 11" /></> : <path d="m16 9 5 6m0-6-5 6" />}
     </svg>
-    <span className="utility-tooltip" role="tooltip">{enabled ? "Turn click sounds off" : "Turn click sounds on"}</span>
     <span className="sr-only">Click sounds {enabled ? "on" : "off"}</span>
   </button>;
 }

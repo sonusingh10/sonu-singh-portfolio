@@ -4,6 +4,7 @@ import "./styles.css";
 import { profile } from "@/content/profile";
 import Script from "next/script";
 import { SiteCursorGlow } from "@/components/site-cursor-glow";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 
 const dmSans = localFont({ src: "../node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2", variable: "--font-dm-sans", weight: "100 1000", display: "optional" });
 const instrumentSerif = localFont({ src: "../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2", variable: "--font-instrument-serif", weight: "400", display: "optional" });
@@ -40,5 +41,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" suppressHydrationWarning><body className={`${dmSans.variable} ${instrumentSerif.variable}`}><script dangerouslySetInnerHTML={{ __html: `try{const root=document.documentElement;const t=localStorage.getItem('theme');root.classList.toggle('dark',t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches);document.addEventListener('click',e=>{if(!(e.target instanceof Element))return;const button=e.target.closest('[data-theme-toggle]');if(!button)return;const dark=!root.classList.contains('dark');root.classList.toggle('dark',dark);localStorage.setItem('theme',dark?'dark':'light');button.setAttribute('aria-pressed',String(dark));button.querySelector('.theme-glyph').textContent=dark?'☼':'◐';button.querySelector('.utility-tooltip').textContent=dark?'Switch to light theme':'Switch to dark theme'})}catch{}` }} /><SiteCursorGlow />{children}{process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ? <Script defer data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js" /> : null}</body></html>;
+  return <html lang="en" suppressHydrationWarning><body className={`${dmSans.variable} ${instrumentSerif.variable}`}><script dangerouslySetInnerHTML={{ __html: `try{const root=document.documentElement;const t=localStorage.getItem('theme');root.classList.toggle('dark',t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches);document.addEventListener('click',e=>{if(!(e.target instanceof Element))return;const button=e.target.closest('[data-theme-toggle]');if(!button)return;const dark=!root.classList.contains('dark');root.classList.toggle('dark',dark);localStorage.setItem('theme',dark?'dark':'light');button.setAttribute('aria-pressed',String(dark));button.querySelector('.theme-glyph').textContent=dark?'☼':'◐';button.querySelector('.utility-tooltip').textContent=dark?'Switch to light theme':'Switch to dark theme'})}catch{}` }} /><SiteCursorGlow /><AnalyticsTracker />{children}{process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ? <Script defer data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js" /> : null}</body></html>;
 }
