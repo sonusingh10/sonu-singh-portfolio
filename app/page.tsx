@@ -8,6 +8,8 @@ import { MagnetAction } from "@/components/react-bits/magnet-action";
 import { TroubleshootingToolkit } from "@/components/troubleshooting-toolkit";
 import { CollapsibleSection, CollapsibleSectionsProvider } from "@/components/collapsible-section";
 import { UtilitySidebar } from "@/components/utility-sidebar";
+import { HeroMindCanvas } from "@/components/hero-mind-canvas";
+import { ForceParticleOverlay } from "@/components/force-particle-overlay";
 
 const personJsonLd = {
   "@context": "https://schema.org", "@type": "Person", name: profile.name,
@@ -44,9 +46,11 @@ export default function Home() {
   return <CollapsibleSectionsProvider><>
     <a href="#main" className="skip-link">Skip to content</a>
     <UtilitySidebar />
+    <ForceParticleOverlay />
     <SiteHeader />
     <main id="main">
       <section className="hero page-wrap" aria-labelledby="hero-title">
+        <HeroMindCanvas />
         <div className="hero-copy">
           <h1 id="hero-title">Make the complex<br /><em>make sense.</em></h1>
           <div className="hero-intro"><p>{profile.headline}</p><span className="hero-index">01 <i /> 05</span></div>
